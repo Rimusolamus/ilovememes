@@ -32,7 +32,7 @@ class DetailFragment : Fragment() {
             view.findViewById<TextView>(R.id.date).text = sdf.format(date)
             view.findViewById<MaterialButton>(R.id.open_in_web).setOnClickListener {
                 val browserIntent =
-                    Intent(Intent.ACTION_VIEW, Uri.parse("https://www.reddit.com/$url"))
+                    Intent(Intent.ACTION_VIEW, Uri.parse("https://www.reddit.com$url"))
                 startActivity(browserIntent)
             }
         }
