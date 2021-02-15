@@ -10,7 +10,8 @@ import com.bumptech.glide.Glide
 import cz.rimu.ilovememes.R
 import cz.rimu.ilovememes.rest.model.HotChildren
 
-class AllFunnyAdapter : RecyclerView.Adapter<AllFunnyAdapter.AllFunnyViewHolder>() {
+class AllFunnyAdapter(private val onItemClick: (HotChildren) -> Unit) :
+    RecyclerView.Adapter<AllFunnyAdapter.AllFunnyViewHolder>() {
 
     private lateinit var view: View
     private var hotChildren: List<HotChildren>? = listOf()
@@ -21,7 +22,7 @@ class AllFunnyAdapter : RecyclerView.Adapter<AllFunnyAdapter.AllFunnyViewHolder>
     ): AllFunnyViewHolder {
         view = LayoutInflater.from(parent.context)
             .inflate(R.layout.funny_row_item, parent, false)
-        return AllFunnyViewHolder(view)
+        return AllFunnyViewHolder(view, onItemClick)
     }
 
     override fun onBindViewHolder(holder: AllFunnyViewHolder, position: Int) {
@@ -33,6 +34,10 @@ class AllFunnyAdapter : RecyclerView.Adapter<AllFunnyAdapter.AllFunnyViewHolder>
             .centerCrop()
             .placeholder(R.drawable.ic_launcher_foreground)
             .into(holder.thumbnail)
+
+        view.setOnClickListener {
+            hotChildren?.get(position)?.let { it1 -> holder.onItemClick(it1) }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -40,7 +45,8 @@ class AllFunnyAdapter : RecyclerView.Adapter<AllFunnyAdapter.AllFunnyViewHolder>
     }
 
     class AllFunnyViewHolder(
-        view: View
+        view: View,
+        val onItemClick: (HotChildren) -> Unit
     ) :
         RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.hotTitle)

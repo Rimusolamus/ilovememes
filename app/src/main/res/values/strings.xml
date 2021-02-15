@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">/r/funny/</string>
     <string name="thx">Thx for your time :3</string>
+    <string name="read_more">read more</string>
+    <string name="post_date">dd.MM.yyyy hh:mm:ss</string>
 </resources>
